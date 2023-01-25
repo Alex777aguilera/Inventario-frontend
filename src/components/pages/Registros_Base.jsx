@@ -7,8 +7,10 @@ const cookies = new Cookies();
 
 $(document).ready(function () {
     var p = document.getElementById('idempresa')
-
+    // select de empresa
     if (p != null){
+        let options = document.querySelectorAll('#idempresa option');
+            options.forEach(o => o.remove());
         $.ajax({
             type: "GET", 
             url: `${cookies.get('server')}/api/empresa`,
@@ -31,8 +33,7 @@ $(document).ready(function () {
     }
 })
 
-export default function R_Tipo_Producto(props){
-  // const url = 'https://localhost:5001/api/area'
+export default function R_Base(props){
     document.querySelector('title').textContent = 'Clinica | Tipo Producto';
     
     useEffect(()=>{
@@ -41,13 +42,15 @@ export default function R_Tipo_Producto(props){
       }else{
         props.history.push('/');
       }
-        },[]); 
+    },[props.history]); 
 
 
     // Validations
-    // formulario tipo producto
+    // Estilos globales
     var classSuccess = 'form-control is-valid form-control-border';
     var classWarning = 'form-control form-control-border is-invalid';
+    
+    // formulario tipo producto
     const formTP = ()=>{
         var formutp = document.getElementById('formtp');
         var a,b,c = false;
@@ -69,7 +72,8 @@ export default function R_Tipo_Producto(props){
         SaveDatatp(a,formutp)
         
     }
-// formulario almacen
+
+    // formulario almacen
     const formAL = ()=>{
         var formual = document.getElementById('formal');
         var d,e,f = false
@@ -91,6 +95,7 @@ export default function R_Tipo_Producto(props){
         SaveDataA(d,formual)
     }
 
+    // Validacion tipo de movimiento
     const formTM = ()=>{
         let formutm = document.getElementById('formTM');
         let a,e,f = false
@@ -113,6 +118,7 @@ export default function R_Tipo_Producto(props){
     }
 
     // Formulario
+
     // tipo producto
     const SaveDatatp=(a,formutp)=>{
         if (a === true){
@@ -135,14 +141,13 @@ export default function R_Tipo_Producto(props){
                     formutp.unid_med.value = ''
                     formutp.description_typeP.className = 'form-control form-control-border'
                     formutp.unid_med.className = 'form-control form-control-border'
-                    //   window.location.href=('/Registro/Tipo/Producto')
                 } 
             })
         }
     }
 
-     // Almacen
-     const SaveDataA=(d,formual)=>{
+     // Registro almacen/bodega
+    const SaveDataA=(d,formual)=>{
         if (d === true){
             $.ajax({
                 type: 'post', 
@@ -168,6 +173,7 @@ export default function R_Tipo_Producto(props){
         }
     }
     
+    // Registro tipo de movimiento
     const SaveDataTM=(a,formutm)=>{
         if (a === true){
             console.log(formutm.detail.value, formutm.option_move.value)
@@ -196,11 +202,10 @@ export default function R_Tipo_Producto(props){
 
     return (
 
-        // 
         <>
-            
             <div className="content-wrapper">
-            <div><Toaster/></div>
+                <div><Toaster/>
+                </div>
                 {/* Content Header (Page header) */}
                 <div className="content-header">
                     <div className="container-fluid">
@@ -211,7 +216,11 @@ export default function R_Tipo_Producto(props){
                             </div>{/* /.col */}
                             <div className="col-sm-6">
                                 <ol className="breadcrumb float-sm-right">
-                                    <li className="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                                    {cookies.get('MenuPrincipal') === 'MenuPrincipal' &&
+                                    <li className="breadcrumb-item">
+                                        <a href="/dashboard">Inicio</a>
+                                    </li>
+                                    }
                                     <li className="breadcrumb-item active">Registros</li>
                                 </ol>
                             </div>{/* /.col */}
@@ -221,7 +230,7 @@ export default function R_Tipo_Producto(props){
                 {/* /.content-header */}
                 {/* Main content */}
                 {/*  */}
-               
+                
 
                 <section class="content">
                     <div className="row">
@@ -243,7 +252,7 @@ export default function R_Tipo_Producto(props){
                                             {/*  */}
 
                                             <div className="col-mg-10 ">
-                                               
+                                                
                                                 <form id="formtp">
                                                     <div class="card-body mt-2">
                                                         <div className="row">
@@ -255,7 +264,7 @@ export default function R_Tipo_Producto(props){
                                                                 </div>
                                                             </div>
                                                             <div class="form-group col-md-6">
-                                                                <label>Unidad Medida</label>        
+                                                                <label><span className="fas fa-vial mr-2" />Unidad Medida</label>        
                                                                 <input type="text" name="unid_med" class="form-control form-control-border"  placeholder="Ejem. ml,unidad,onz" />
                                                                 <div class="invalid-feedback">
                                                                     Campo vacio.
@@ -301,14 +310,14 @@ export default function R_Tipo_Producto(props){
                                                     <div class="card-body">
                                                         <div className="row">
                                                             <div class="form-group col-md-6">
-                                                                <label>Almacen</label>
+                                                                <label><span className="fas fa-store mr-2" />Almacen</label>
                                                                 <input type="text" name="detail_store" class="form-control form-control-border"  placeholder="Almacen" />
                                                                 <div class="invalid-feedback">
                                                                     Campo vacio.
                                                                 </div>
                                                             </div>
                                                             <div class="form-group col-md-6 ">
-                                                                <label>Empresa</label>
+                                                                <label><span className="fas fa-warehouse mr-2" />Empresa</label>
                                                                 
                                                                     <select className='custom-select form-control-border' id='idempresa' name='cod_enterprise' >
                                                                     </select>
@@ -360,7 +369,7 @@ export default function R_Tipo_Producto(props){
                                                             <div className="row">
                                                                 
                                                                 <div class="form-group col-md-7">
-                                                                    <label>Movimiento</label>        
+                                                                    <label><span className="fas fa-retweet mr-2" />Movimiento</label>        
                                                                     <input type="text" name="detail" class="form-control form-control-border"  placeholder="Entrada.Salida.Traslado etc" />
                                                                     <div class="invalid-feedback">
                                                                         Campo vacio.
@@ -406,7 +415,8 @@ export default function R_Tipo_Producto(props){
                 
 
                 
-            </div></>
+            </div>
+        </>
         // 
     )
 
