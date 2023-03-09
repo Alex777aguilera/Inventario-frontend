@@ -4,7 +4,10 @@ import logod from '../img/user.svg'
 
 export default function Header(props) {
   const cookies = new Cookies();
-
+  const reloadD = () =>{
+    window.location.href = '#/dashboard'
+    window.location.reload();
+   }
   var useri = '';
   var logo
   if(cookies.get('ID')){
@@ -75,7 +78,8 @@ if(cookies.get('user')){
         </li>
         <li className="nav-item d-none d-sm-inline-block">
           {cookies.get('MenuPrincipal') === 'MenuPrincipal' &&
-          <a href="/dashboard" className="nav-link">Inicio</a>
+          // <a href="/dashboard" >Inicio</a>
+          <a href='#' className="nav-link" onClick={reloadD}>Inicio</a>
           }
         </li>
         <li className="nav-item d-none d-sm-inline-block">
@@ -151,9 +155,5 @@ if(cookies.get('user')){
     
   )
   
-}else{
-  return (
-    <center><h1>&nbsp; <span className='text-danger'> 404</span></h1></center>
-  )
 }
 }

@@ -55,10 +55,14 @@ export default function Semaforizacion_Verde(props) {
     }
   },[props.history]); 
 
-
+  const reloadD = () =>{
+    window.location.href = '#/dashboard'
+    window.location.reload();
+   }
     // 
    const Report_SVERDE=()=>{
       // window.open(`http://atenea/ReportServer/Pages/ReportViewer.aspx?%2fUAC_REPORT%2fReporteDispositivos&rs:Command=Render&rs:embed=true&rc:Parameters=false&id_enterprise=${cookies.get('enterprise')}`,'_blank');
+      window.open(`http://atenea/ReportServer/Pages/ReportViewer.aspx?%2fAPCLIN_REPORT%2fReporteSemaforizaciónVerde&rs:Command=Render&rs:embed=true&rc:Parameters=false&id_enterprise=${cookies.get('enterprise')}`,'_blank');
     }
     
     return (
@@ -72,7 +76,7 @@ export default function Semaforizacion_Verde(props) {
               </div>{/* /.col */}
               <div className="col-sm-6">
                 <ol className="breadcrumb float-sm-right">
-                  <li className="breadcrumb-item">Inicio</li>
+                  <li className="breadcrumb-item"> <a href='#' onClick={reloadD}>Inicio</a></li>
                   <li className="breadcrumb-item active">Detalle Semaforizacion</li>
                 </ol>
               </div>{/* /.col */}

@@ -1,5 +1,5 @@
 import React  from 'react'
-import { BrowserRouter, Route, Switch  } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, HashRouter  } from 'react-router-dom';
 
 
 import Header from './components/common/header.jsx'
@@ -23,8 +23,9 @@ export default function App() {
   // const [login,setLogin] = useState(false)
   return (
      
-    <BrowserRouter  >
-    <Switch>
+    <HashRouter basename="/">
+    {/* <BrowserRouter> */}
+    {/* <Switch> */}
       <Route exact path="/" component={Login} />
       
         <div>
@@ -42,9 +43,10 @@ export default function App() {
           <Route exact path="/Semaforizacion/Verde" component={Semaforizacion_Verde}/>
           <Route exact path="/barcode" component={BarCode}/>
         </div>
-    </Switch>
+    {/* </Switch> */}
     {/* <Footer/> */}
-    </BrowserRouter>
+    {/* </BrowserRouter> */}
+     </HashRouter>
     
   )
 }

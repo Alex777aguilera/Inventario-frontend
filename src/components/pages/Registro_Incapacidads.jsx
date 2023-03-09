@@ -6,25 +6,7 @@ import toast, { Toaster } from "react-hot-toast"
 const cookies = new Cookies();
 
 
-const Correlative_Inc = () =>{
-  $.ajax({
-    type: "put", 
-    url:`${cookies.get('server')}/api/incapacidades/${cookies.get('enterprise')}`,
-    success:function(json_data) {  
-      const cod = document.getElementById('n_tranzability')
-      if (json_data !== 'Not Data'){
-        cod.innerText = json_data[0]['correlative']
-        cod.value = json_data[0]['correlative']
-      }else{
-        cod.innerText = 'No existen registros'
-        cod.value = ''
-      }
-    }
-  })
-}
-if(window.location.href === `${cookies.get('local')}Incapacidades`){
-  Correlative_Inc()
-}
+
 
 export default function Ficapacidades(props){
   document.querySelector('title').textContent = 'Clinica | Registros';
@@ -41,7 +23,31 @@ export default function Ficapacidades(props){
       },[props.history]); 
 
   // Validations
-  
+  const reloadD = () =>{
+    window.location.href = '#/dashboard'
+    window.location.reload();
+   }
+
+   const Correlative_Inc = () =>{
+    $.ajax({
+      type: "put", 
+      url:`${cookies.get('server')}/api/incapacidades/${cookies.get('enterprise')}`,
+      success:function(json_data) {  
+        const cod = document.getElementById('n_tranzability')
+        if (json_data !== 'Not Data'){
+          cod.innerText = json_data[0]['correlative']
+          cod.value = json_data[0]['correlative']
+        }else{
+          cod.innerText = 'No existen registros'
+          cod.value = ''
+        }
+      }
+    })
+  }
+  if(document.getElementById('n_tranzability')){
+    Correlative_Inc()
+  }
+   
   // Funcion para cambiar de estados los estilos
   const form =()=>{
       let formu = document.getElementById('quickForm1');
@@ -199,7 +205,7 @@ export default function Ficapacidades(props){
               <ol className="breadcrumb float-sm-right">
                 {cookies.get('MenuPrincipal') === 'MenuPrincipal' &&
                   <li className="breadcrumb-item">
-                    <a href="/dashboard">Inicio</a>
+                    <a href='#' onClick={reloadD}>Inicio</a>
                   </li>
                 }
                 <li className="breadcrumb-item active">Incapacidades</li>
