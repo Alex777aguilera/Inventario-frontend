@@ -7,13 +7,42 @@ import 'react-bootstrap';
 
 export default function Menu() {
   const cookies = new Cookies();
- 
+  const reloadi = (event) =>{
+    window.location.href = '#/Incapacidades'
+    window.location.reload(); 
+  }
+  const reloaddi = (event) =>{
+    window.location.href = '#/Detalle/Incapacidades'
+    window.location.reload(); 
+  }
+  const reloadp = (event) =>{
+    window.location.href = '#/Detalle/Productos'
+    window.location.reload(); 
+  }
+  const reloadk = (event) =>{
+    window.location.href = '#/kardex'
+    window.location.reload(); 
+  }
+  const reloadtk = (event) =>{
+    window.location.href = '#/Kardex/Trazabilidad'
+    window.location.reload(); 
+  }
+  const reloadrb = (event) =>{
+    window.location.href = '#/Registros/Base'
+    window.location.reload(); 
+  }
+  const reloadqr = (event) =>{
+    window.location.href = '#/barcode'
+    window.location.reload(); 
+  }
+
+
   if(cookies.get('user')){
     return (
        
       <aside className="main-sidebar sidebar-dark-danger elevation-4">
       {/* Brand Logo */}
-      <a href="#" className="brand-link mb-4 ">
+      <a href className="brand-link mb-4 ">
         <img src={logo} alt="" className="border brand-image rounded  border-dark  ml-4"/>
         <span className="   text-danger">&nbsp;</span>
       </a>
@@ -46,7 +75,7 @@ export default function Menu() {
                 <div class="card card-body  bg-dark ">
                   {cookies.get('Incapacidades') === 'Incapacidades' &&
                   <div class="nav-item" type="button"> 
-                    <a href="/Incapacidades" className="nav-link">
+                    <a type='button' href className="nav-link" onClick={reloadi}>
                       <i className="far fa-circle nav-icon mr-2" />
                       <span className='nav-header'>Incapacidades</span>
                       
@@ -55,20 +84,19 @@ export default function Menu() {
                   }
                   {cookies.get('DetalleIncapacidades') === 'DetalleIncapacidades' &&
                   <div class="nav-item" type="button"> 
-                    <a href="/Detalle/Incapacidades" className="nav-link">
-                      <i className="far fa-circle nav-icon mr-2" />
-                      <span className='nav-header'>Detalle Incapacidades</span>
-                      
+                    <a href type="button" class="nav-link" onClick={reloaddi}>
+                    <i className="far fa-circle nav-icon " />
+                        <span className='nav-header' >Detalle Incapacidades</span>
                     </a>
+                    
                   </div>
                   }
                   
                   {cookies.get('DetalleProducto') === 'DetalleProducto'  &&
                   <div class="nav-item" type="button"> 
-                    <a href="/Detalle/Productos" className="nav-link">
-                      <i className="far fa-circle nav-icon mr-2" />
-                      <span className='nav-header'>Detalle Productos</span>
-                      
+                    <a href type="button" class="nav-link" onClick={reloadp}>
+                      <i className="far fa-circle nav-icon " />
+                      <span className='nav-header' >Detalle Productos</span>
                     </a>
                   </div>
                   }
@@ -79,8 +107,8 @@ export default function Menu() {
             }
             {cookies.get('Kardex') === 'Kardex' &&
             <li className="nav-item">
-              <a href="/kardex" className="nav-link">
-              <span className="fa fa-object-ungroup mr-2" />
+              <a href type="button" class="nav-link" onClick={reloadk}>
+                <span className="fa fa-object-ungroup mr-2" />
                 <p>
                   Kardex
                   <i className="nav-icon far fa-circle text-info right"></i>
@@ -90,7 +118,7 @@ export default function Menu() {
             }
             {cookies.get('TrazabilidadKardex') === 'TrazabilidadKardex' &&
             <li className="nav-item">
-              <a href="/Kardex/Trazabilidad" className="nav-link">
+              <a href type="button" class="nav-link" onClick={reloadtk}>
               <span className="fa fa-object-ungroup mr-2" />
                 <p>
                   Trazabilidad Kardex
@@ -111,7 +139,7 @@ export default function Menu() {
                 <li class="card card-body  bg-dark ">
                   {cookies.get('RegistrosBase') === 'RegistrosBase' &&
                   <div class="nav-item" type="button"> 
-                    <a href="/Registros/Base" className="nav-link">
+                    <a href type="button" class="nav-link" onClick={reloadrb}>
                       <i className="far fa-circle nav-icon mr-2" />
                       <span className='nav-header'>Registros Base</span>
                       
@@ -120,7 +148,7 @@ export default function Menu() {
                   }
                   {cookies.get('CodigoBarras') === 'CodigoBarras' &&
                   <div class="nav-item" type="button"> 
-                    <a href="/barcode" className="nav-link">
+                    <a href type="button" class="nav-link" onClick={reloadqr}>
                       <i className="far fa-circle nav-icon mr-2" />
                       <span className='nav-header'>Generar Codigo Barras</span>
                       
@@ -139,10 +167,6 @@ export default function Menu() {
       {/* /.sidebar */}
       </aside>
   
-    );
-  }else{
-    return (
-      <center><h1>&nbsp; Not Found</h1></center>
     );
   }
 }

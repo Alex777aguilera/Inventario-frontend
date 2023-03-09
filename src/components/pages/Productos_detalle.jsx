@@ -55,10 +55,15 @@ export default function Produtos_D(props) {
     }
   },[props.history]); 
 
+  const reloadD = () =>{
+    window.location.href = '#/dashboard'
+    window.location.reload();
+   }
+   
 
   // Reporte de los productos en el sistema
   const Report_Product=()=>{
-    // window.open(`http://atenea/ReportServer/Pages/ReportViewer.aspx?%2fUAC_REPORT%2fReporteDispositivos&rs:Command=Render&rs:embed=true&rc:Parameters=false`,'_blank');
+    window.open(`http://atenea/ReportServer/Pages/ReportViewer.aspx?%2fAPCLIN_REPORT%2fReporteSeguroSocial&rs:Command=Render&rs:embed=true&rc:Parameters=false&id_enterprise=${cookies.get('enterprise')}`,'_blank');
   }
 
   // Inicio de cargar datos a los Selects
@@ -328,8 +333,9 @@ export default function Produtos_D(props) {
         success: function (res){
           toast.success(res,{duration: 6000, position:"top-right"})
           selectProd()
-          setTimeout("location.href='/Detalle/Productos'", 1000);//Recargar la pagina en un segundo
-          
+          // setTimeout("location.href='#/Detalle/Productos'", 1000);//Recargar la pagina en un segundo
+          window.location.href = '#/Detalle/Productos'
+          window.location.reload(); 
         } 
       })
 
@@ -416,7 +422,7 @@ export default function Produtos_D(props) {
                 <ol className="breadcrumb float-sm-right">
                   {cookies.get('MenuPrincipal') === 'MenuPrincipal' &&
                     <li className="breadcrumb-item">
-                      <a href="/dashboard">Inicio</a>
+                      <a href='#' onClick={reloadD}>Inicio</a>
                     </li>
                   }
                   <li className="breadcrumb-item active">Detalle Productos</li>

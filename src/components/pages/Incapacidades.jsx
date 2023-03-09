@@ -67,7 +67,6 @@ $(function (){
 });
 
 export default function Incapacidades(props) {
-
   document.querySelector('title').textContent = 'Clinica | Detalle Incapacidad';
     
     useEffect(()=>{
@@ -79,13 +78,17 @@ export default function Incapacidades(props) {
       
     },[props.history]); 
 
+    const reloadD = () =>{
+      window.location.href = '#/dashboard'
+      window.location.reload();
+     }
     // Reportes de incapacidades mensuales
     const Report_Incapacidades_Mensual=()=>{
       let data = document.getElementById('formRM')
       if(data.f_i.value === '' || data.f_s.value === ''){
         toast.error('Campos Vacios',{duration: 6000, position:"top-right"})
       }else{
-        // window.open(`http://atenea/ReportServer/Pages/ReportViewer.aspx?%2fUAC_REPORT%2fReporteDispositivos&rs:Command=Render&rs:embed=true&rc:Parameters=false&fechaer=${data.f_i.value}&fechasr=${data.f_s.value}&id_enterprise=${cookies.get('enterprise')}`,'_blank');
+        window.open(`http://atenea/ReportServer/Pages/ReportViewer.aspx?%2fAPCLIN_REPORT%2fReportePermisoEIncapacidadesMensuales&rs:Command=Render&rs:embed=true&rc:Parameters=false&fechaer=${data.f_i.value}&fechasr=${data.f_s.value}&id_enterprise=${cookies.get('enterprise')}`,'_blank');
         data.f_i.value = ''
         data.f_s.value = ''
       }
@@ -96,7 +99,7 @@ export default function Incapacidades(props) {
       if(data2.f_i2.value === '' || data2.f_s2.value === ''){
         toast.error('Campos Vacios',{duration: 6000, position:"top-right"})
       }else{
-        // window.open(`http://atenea/ReportServer/Pages/ReportViewer.aspx?%2fUAC_REPORT%2fReporteDispositivos&rs:Command=Render&rs:embed=true&rc:Parameters=false&fechaer=${data2.f_i2.value}&fechasr=${data2.f_s2.value}&id_enterprise=${cookies.get('enterprise')}`,'_blank');
+        window.open(`http://atenea/ReportServer/Pages/ReportViewer.aspx?%2fAPCLIN_REPORT%2fReportePermisoIncapacidadesDiarias&rs:Command=Render&rs:embed=true&rc:Parameters=false&fechaer=${data2.f_i2.value}&fechasr=${data2.f_s2.value}&id_enterprise=${cookies.get('enterprise')}`,'_blank');
         data2.f_i2.value = ''
         data2.f_s2.value = ''
       }
@@ -183,7 +186,7 @@ export default function Incapacidades(props) {
                   <ol className="breadcrumb float-sm-right">
                   {cookies.get('MenuPrincipal') === 'MenuPrincipal' &&
                     <li className="breadcrumb-item">
-                      <a href="/dashboard">Inicio</a>
+                      <a href='#' onClick={reloadD}>Inicio</a>
                     </li>
                   }
                     <li className="breadcrumb-item active">Detalle Incapacidades</li>
